@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // get all todos
 app.get('/api/v1/todos/:keyword', (req, res) => {
+  console.log('xxxxxxxxxxxxxxx');
   var keyword = req.params.keyword;
   console.log(keyword);
   googleTrends.interestOverTime({keyword: keyword})
