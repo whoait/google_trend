@@ -9,9 +9,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// get all todos
-app.get('/api/v1/todos/:keyword', (req, res) => {
-  console.log('xxxxxxxxxxxxxxx');
+// get google_trend_data
+app.get('/api/v1/google_trend_data/:keyword', (req, res) => {
   var keyword = req.params.keyword;
   console.log(keyword);
   googleTrends.interestOverTime({keyword: keyword})
@@ -19,7 +18,7 @@ app.get('/api/v1/todos/:keyword', (req, res) => {
     res.status(200).send({
       success: 'true',
       message: 'todos retrieved successfully',
-      todos: JSON.parse(results)
+      data: JSON.parse(results)
     })
   })
   .catch(function(err){
