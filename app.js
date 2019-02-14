@@ -10,12 +10,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // get google_trend_data
-app.get('/api/v1/google_trend_data/:keyword', (req, res) => {
+app.get('/api/v1/google_trend_data/:keyword/:geo', (req, res) => {
   var keyword = req.params.keyword;
+  var geo = req.params.geo;
   var time = new Date();
   var time_last_year = time.setFullYear(time.getFullYear()-1);
   console.log(new Date(time_last_year));
-  googleTrends.interestOverTime({keyword: keyword, geo: 'SG', startTime: new Date(time_last_year), endTime: new Date(), })
+  console.log(geo)
+  googleTrends.interestOverTime({keyword: keyword, geo: geo , startTime: new Date(time_last_year), endTime: new Date(), })
   .then(function(results){
     res.status(200).send({
       success: 'true',
